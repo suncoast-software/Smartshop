@@ -1,0 +1,12 @@
+﻿<Application x:Class="Smartshop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Smartshop"
+             xmlns:vm="clr-namespace:Smartshop.ViewModels"
+             xmlns:v="clr-namespace:Smartshop.Views">
+
+    <Application.Resources>
+        <ResourceDictionary Source="\Themes\theme.xaml"/>
+    </Application.Resources>
+    
+</Application>

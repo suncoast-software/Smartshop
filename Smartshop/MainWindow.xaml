@@ -1,0 +1,73 @@
+﻿<Window x:Class="Smartshop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Smartshop"
+        xmlns:vm="clr-namespace:Smartshop.ViewModels"
+        xmlns:v="clr-namespace:Smartshop.Views"
+        mc:Ignorable="d"
+        Title="Smartshop 1.0.0.1" Height="800" Width="1400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <DataTemplate x:Name="loginViewTemplate" DataType="{x:Type vm:LoginViewModel}">
+            <v:LoginView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="CustomerViewTemplate" DataType="{x:Type vm:CustomerViewModel}">
+            <v:CustomersView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Tools -->
+        <Grid DockPanel.Dock="Top" Height="40" Background="{StaticResource DarkToLiteBlueGradient}" Panel.ZIndex="1">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="12" ShadowDepth="0" Direction="270" Opacity="0.7"/>
+            </Grid.Effect>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Customers Button -->
+            <Grid Grid.Column="0">
+                <Button  Content="Customers" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" />
+            </Grid>
+            <!-- Invoices Button-->
+            <Grid Grid.Column="1">
+                <Button Content="Invoices" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1"/>
+            </Grid>
+            <!-- Inventory Button-->
+            <Grid Grid.Column="2">
+                <Button Content="Inventory" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1"/>
+            </Grid>
+            <!--Tool Buttons -->
+            <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button>
+                    <Button.Content>
+                        <Image Source="\Assets\Images\addIcon.png"/>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <Image Source="\Assets\Images\saveIcon.png"/>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <Image Source="\Assets\Images\deleteIcon.png"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <!-- Content -->
+        <Grid DockPanel.Dock="Bottom" Background="{StaticResource DarkToLiteBlueBGGradient}" >
+            <ContentControl Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </DockPanel>
+</Window>
