@@ -13,6 +13,7 @@ namespace Smartshop.ViewModels
     {
         public RelayCommand LoginCommand { get; private set; }
         public RelayCommand OnCancelCommand { get; private set; }
+
         private AppUser _user;
 
         public LoginViewModel()

@@ -16,7 +16,6 @@
             <v:CustomersView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
-
     <DockPanel>
         <!-- Tools -->
         <Grid DockPanel.Dock="Top" Height="40" Background="{StaticResource DarkToLiteBlueGradient}" Panel.ZIndex="1">
@@ -46,28 +45,11 @@
             <Grid Grid.Column="2">
                 <Button Content="Inventory" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1"/>
             </Grid>
-            <!--Tool Buttons -->
-            <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button>
-                    <Button.Content>
-                        <Image Source="\Assets\Images\addIcon.png"/>
-                    </Button.Content>
-                </Button>
-                <Button>
-                    <Button.Content>
-                        <Image Source="\Assets\Images\saveIcon.png"/>
-                    </Button.Content>
-                </Button>
-                <Button>
-                    <Button.Content>
-                        <Image Source="\Assets\Images\deleteIcon.png"/>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
+           
         </Grid>
         <!-- Content -->
         <Grid DockPanel.Dock="Bottom" Background="{StaticResource DarkToLiteBlueBGGradient}" >
-            <ContentControl Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ContentControl Content="{Binding}" Margin="20"/>
         </Grid>
     </DockPanel>
 </Window>

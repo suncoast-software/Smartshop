@@ -5,8 +5,67 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Smartshop.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <DockPanel>
+        <DockPanel.Effect>
+            <DropShadowEffect Direction="270" Opacity="0.65"/>
+        </DockPanel.Effect>
+        <!-- Tools -->
+        <Grid DockPanel.Dock="Top" Height="40" Background="{StaticResource DarkToLiteBlueGradient}" Panel.ZIndex="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Customers Button -->
+            <Grid Grid.Column="0">
+                <Button  Content="Projects" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" />
+            </Grid>
+            <!-- Invoices Button-->
+            <Grid Grid.Column="1">
+                <Button Content="Invoices" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1"/>
+            </Grid>
+            <!-- Inventory Button-->
+            <Grid Grid.Column="2">
+                <Button Content="Inventory" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1"/>
+            </Grid>
+            <!--Tool Buttons -->
+            <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button>
+                    <Button.Content>
+                        <Image Source="\Assets\Images\addIcon.png"/>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <Image Source="\Assets\Images\saveIcon.png"/>
+                    </Button.Content>
+                </Button>
+                <Button>
+                    <Button.Content>
+                        <Image Source="\Assets\Images\deleteIcon.png"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <!-- Content -->
+        <Grid DockPanel.Dock="Bottom" Background="{StaticResource DarkToLiteBlueBGGradient}" >
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </UserControl>
