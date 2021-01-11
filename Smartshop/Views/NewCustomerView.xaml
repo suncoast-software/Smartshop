@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Smartshop.Views"
+             xmlns:vm="clr-namespace:Smartshop.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1000">
     <DockPanel>
@@ -26,12 +27,12 @@
            
             <!--Tool Buttons -->
             <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button>
+                <Button Command="{Binding SaveCustomerCommand}">
                     <Button.Content>
                         <Image Source="\Assets\Images\saveIcon.png"/>
                     </Button.Content>
                 </Button>
-                <Button>
+                <Button Command="{Binding DeleteInputCommand}">
                     <Button.Content>
                         <Image Source="\Assets\Images\deleteIcon.png"/>
                     </Button.Content>
@@ -72,7 +73,7 @@
                        
                         <StackPanel Height="50" Grid.ColumnSpan="2"  Margin="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                            
-                            <TextBox materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
+                            <TextBox x:Name="txtCompanyName" Text="{Binding Path=Customer.CompanyName}"  materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
                             <Image Source="\Assets\Images\defaultContact.png" Width="36" Height="36" Opacity=".4"/>
                         </StackPanel>
                     </Grid>
@@ -84,7 +85,7 @@
 
                         <StackPanel Height="50" Grid.ColumnSpan="2"  Margin="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                            <TextBox materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
+                            <TextBox x:Name="txtContactName"  materialDesign:HintAssist.Hint="Contact Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
                             <Image Source="\Assets\Images\defaultContact.png" Width="36" Height="36" Opacity=".4"/>
                         </StackPanel>
                     </Grid>
@@ -96,7 +97,7 @@
 
                         <StackPanel Height="50" Grid.ColumnSpan="2"  Margin="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                            <TextBox materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
+                            <TextBox x:Name="txtEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
                             <Image Source="\Assets\Images\defaultContact.png" Width="36" Height="36" Opacity=".4"/>
                         </StackPanel>
                     </Grid>
@@ -108,7 +109,7 @@
 
                         <StackPanel Height="50" Grid.ColumnSpan="2"  Margin="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                            <TextBox materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
+                            <TextBox x:Name="txtPhone" materialDesign:HintAssist.Hint="Phone #" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
                             <Image Source="\Assets\Images\defaultContact.png" Width="36" Height="36" Opacity=".4"/>
                         </StackPanel>
                     </Grid>
@@ -120,7 +121,7 @@
 
                         <StackPanel Height="50" Grid.ColumnSpan="2"  Margin="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                            <TextBox materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
+                            <TextBox x:Name="txtAddress" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
                             <Image Source="\Assets\Images\defaultContact.png" Width="36" Height="36" Opacity=".4"/>
                         </StackPanel>
                     </Grid>

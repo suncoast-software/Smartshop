@@ -8,6 +8,32 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.ColumnSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+                    <GradientStop Color="#FF00786D"/>
+                    <GradientStop Color="#FF06AE9F" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                <Button Width="25" Height="25" Style="{StaticResource MaterialDesignFlatAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Power" Foreground="White"/>
+                </Button>
+                <Button Width="25" Height="25" Style="{StaticResource MaterialDesignFlatAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Power" />
+                </Button>
+                <Button Width="25" Height="25" Style="{StaticResource MaterialDesignFlatAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Power" />
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
