@@ -15,11 +15,39 @@ namespace Smartshop.ViewModels
         public ICommand SaveCustomerCommand { get; set; }
         public ICommand DeleteInputCommand { get; set; }
 
-        private Customer customer;
-        public Customer Customer
+        private string companyName;
+        public string CompanyName
         {
-            get { return customer; }
-            set { OnPropertyChanged(ref customer, value); }
+            get { return companyName; }
+            set { OnPropertyChanged(ref companyName, value); }
+        }
+
+        private string contactName;
+        public string ContactName
+        {
+            get { return contactName; }
+            set { OnPropertyChanged(ref contactName, value); }
+        }
+
+        private string email;
+        public string Email
+        {
+            get { return email; }
+            set { OnPropertyChanged(ref email, value); }
+        }
+
+        private string phone;
+        public string Phone
+        {
+            get { return phone; }
+            set { OnPropertyChanged(ref phone, value); }
+        }
+
+        private string address;
+        public string Address
+        {
+            get { return address; }
+            set { OnPropertyChanged(ref address, value); }
         }
 
         public AddNewCustomerViewModel()
@@ -31,14 +59,16 @@ namespace Smartshop.ViewModels
 
         public async void SaveCustomer()
         {
-            using var db = new SmartshopDbContext();
-            await db.AddAsync(customer);
-            await db.SaveChangesAsync();
+            
         }
 
         public void DeleteInputs()
         {
-
+            CompanyName = "";
+            ContactName = "";
+            Email = "";
+            Phone = "";
+            Address = "";
         }
     }
 }
