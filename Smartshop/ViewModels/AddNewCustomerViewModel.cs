@@ -53,13 +53,29 @@ namespace Smartshop.ViewModels
         public AddNewCustomerViewModel()
         {
             SaveCustomerCommand = new RelayCommand(SaveCustomer);
-            DeleteInputCommand = new RelayCommand(DeleteInputs);
-
+            DeleteInputCommand = new RelayCommand(DeleteInputs); 
         }
 
         public async void SaveCustomer()
         {
-            
+            //TODO: finish Item model
+            //TODO: add model to dbContext
+
+            Customer cust = new Customer()
+            {
+                CompanyName = companyName,
+                ContactName = contactName,
+                Email = email,
+                Phone = phone,
+                Address = address
+            };
+
+            if (cust.CompanyName == "")
+                return;
+
+            using var db = new SmartshopDbContext();
+            await db.AddAsync(cust);
+            await db.SaveChangesAsync();
         }
 
         public void DeleteInputs()

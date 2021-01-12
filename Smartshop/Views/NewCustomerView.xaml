@@ -4,8 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Smartshop.Views"
-             xmlns:vm="clr-namespace:Smartshop.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1000">
     <DockPanel>
@@ -26,13 +24,13 @@
             </Grid.ColumnDefinitions>
            
             <!--Tool Buttons -->
-            <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Command="{Binding SaveCustomerCommand}">
+            <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                <Button Command="{Binding SaveCustomerCommand}" Margin="2">
                     <Button.Content>
                         <Image Source="\Assets\Images\saveIcon.png"/>
                     </Button.Content>
                 </Button>
-                <Button Command="{Binding DeleteInputCommand}">
+                <Button Command="{Binding DeleteInputCommand}" Margin="2">
                     <Button.Content>
                         <Image Source="\Assets\Images\deleteIcon.png"/>
                     </Button.Content>

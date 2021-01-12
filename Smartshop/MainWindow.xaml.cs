@@ -24,7 +24,8 @@ namespace Smartshop
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new CustomerViewModel();
+            DataContext = new AppViewModel();
+            
         }
     }
 }

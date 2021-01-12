@@ -10,10 +10,10 @@
         Title="Smartshop 1.0.0.1" Height="1000" Width="1400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <DataTemplate x:Name="loginViewTemplate" DataType="{x:Type vm:LoginViewModel}">
-            <v:LoginView DataContext="{Binding}"/>
+            <v:LoginView/>
         </DataTemplate>
-        <DataTemplate x:Name="CustomerViewTemplate" DataType="{x:Type vm:CustomerViewModel}">
-            <v:NewCustomerView DataContext="{Binding}"/>
+        <DataTemplate x:Name="CustomerViewTemplate" DataType="{x:Type vm:AddNewCustomerViewModel}">
+            <v:NewCustomerView/>
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
@@ -35,21 +35,21 @@
 
             <!-- Customers Button -->
             <Grid Grid.Column="0">
-                <Button  Content="Customers" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" />
+                <Button  Content="Customers" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" Command="{Binding LoadCustomerViewCommand}"/>
             </Grid>
             <!-- Invoices Button-->
             <Grid Grid.Column="1">
-                <Button Content="Invoices" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1"/>
+                <Button Content="Invoices" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" Command="{Binding LoadLoginViewCommand}"/>
             </Grid>
             <!-- Inventory Button-->
             <Grid Grid.Column="2">
                 <Button Content="Inventory" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1"/>
             </Grid>
-           
+            <TextBlock Grid.Column="7"  Text="{Binding Path=CurDate, Mode=OneWay}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="14" VerticalAlignment="Center" Margin="0 0 0 0"/>
         </Grid>
         <!-- Content -->
         <Grid DockPanel.Dock="Bottom" Background="{StaticResource DarkToLiteBlueBGGradient}" >
-            <ContentControl Content="{Binding}" Margin="20"/>
+            <ContentControl Content="{Binding Path=SelectedViewModel}" Margin="20"/>
         </Grid>
     </DockPanel>
 </Window>

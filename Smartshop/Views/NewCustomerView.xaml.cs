@@ -24,7 +24,7 @@ namespace Smartshop.Views
         public NewCustomerView()
         {
             InitializeComponent();
-            DataContext = new AddNewCustomerViewModel();
+           
         }
     }
 }
