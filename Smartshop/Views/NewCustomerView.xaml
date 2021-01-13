@@ -11,7 +11,7 @@
             <DropShadowEffect Direction="270" Opacity="0.65"/>
         </DockPanel.Effect>
         <!-- Tools -->
-        <Grid DockPanel.Dock="Top" Height="40" Background="{StaticResource DarkToLiteBlueGradient}" Panel.ZIndex="1">
+        <Grid DockPanel.Dock="Top" Height="40"  Background="{StaticResource AccentLiteBrush}" Panel.ZIndex="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

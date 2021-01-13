@@ -3,9 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Smartshop.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Effect>
+        <DropShadowEffect Direction="270" BlurRadius="4" ShadowDepth="3"/>
+    </UserControl.Effect>
     <Grid Background="WhiteSmoke" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -15,8 +19,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition/>
-            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Background="{StaticResource AccentLiteBrush}">
@@ -28,9 +30,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="New Invoice" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="{StaticResource PrimaryDarkBrush}"/>
+                <TextBlock Text="New Invoice" Grid.Column="0"  Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="10 0 0 0"  Foreground="{StaticResource PrimaryDarkBrush}"/>
                 <!--Tool Buttons -->
-                <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 2 10 0">
                     <Button Command="{Binding SaveInvoiceCommand}" Margin="2">
                         <Button.Content>
                             <Image Source="\Assets\Images\saveIcon.png"/>
@@ -43,7 +45,33 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            
         </StackPanel>
+    
+        <Grid  Grid.Row="1" Grid.ColumnSpan="4" Background="{StaticResource DarkToLiteBlueBGGradient}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="20 0 0 0">
+                <StackPanel Height="40"   Grid.ColumnSpan="2"   Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBox Text="{Binding Path=InvNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Invoice Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="200" IsEnabled="False"></TextBox>
+                    <materialDesign:PackIcon Kind="Number0"  Width="40" Height="40" Opacity=".4" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBox Text="{Binding Path=Customer.CompanyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Customer Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="200"></TextBox>
+                    <materialDesign:PackIcon Kind="AboutCircle" Width="40" Height="40"  VerticalAlignment="Center"  Opacity=".4"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1"   Margin="0 0" RenderTransformOrigin="0.596,0.502">
+                <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Width="200" Margin="0 4">
+                    <ComboBox  ItemsSource="{Binding Path=Customers, Mode=TwoWay}" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyName" Style="{StaticResource MaterialDesignComboBox}" Width="200"  HorizontalAlignment="Center"></ComboBox>
+                </StackPanel>
+                <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 -8">
+                    <TextBox  Text="{Binding Path=Customer.ContactName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Contact Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="200"></TextBox>
+                    <materialDesign:PackIcon Kind="AboutCircle" Width="40" Height="40"  VerticalAlignment="Center"  Opacity=".4"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

@@ -18,5 +18,17 @@ namespace Smartshop.Helpers
 
             return Convert.ToBase64String(hashBytes);
         }
+
+        public static string GenerateInvoiceNumber()
+        {
+            Random rnd = new Random();
+            var builder = new StringBuilder();
+            for (int i = 0; i < 12; i++)
+            {
+                var num = rnd.Next(1, 9);
+                builder.Append(num);
+            }
+            return builder.ToString(); ;
+        }
     }
 }

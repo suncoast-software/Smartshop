@@ -43,5 +43,12 @@ namespace Smartshop.Models
             get { return price; }
             set { OnPropertyChanged(ref price, value); }
         }
+
+        private bool isAvalible;
+        public bool IsAvailable
+        {
+            get { return isAvalible; }
+            set { OnPropertyChanged(ref isAvalible, value); }
+        }
     }
 }
