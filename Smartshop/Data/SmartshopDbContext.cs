@@ -14,6 +14,7 @@ namespace Smartshop.Data
         //Add DbSet<Class> here
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Item> Items { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,6 +28,7 @@ namespace Smartshop.Data
 
             modelBuilder.Entity<AppUser>().HasKey(m => m.Id);
             modelBuilder.Entity<Customer>().HasKey(m => m.Id);
+            modelBuilder.Entity<Item>().HasKey(m => m.Id);
         }
     }
 }

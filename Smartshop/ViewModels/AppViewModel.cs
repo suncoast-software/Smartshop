@@ -22,10 +22,12 @@ namespace Smartshop.ViewModels
 
         public ICommand LoadCustomerViewCommand { get; set; }
         public ICommand LoadLoginViewCommand { get; set; }
+        public ICommand LoadNewInvoiceViewCommand { get; set; }
         public AppViewModel()
         {
             LoadCustomerViewCommand = new RelayCommand(LoadCustomerView);
             LoadLoginViewCommand = new RelayCommand(LoadLoginView);
+            LoadNewInvoiceViewCommand = new RelayCommand(LoadNewInvoiceView);
            // _selectedViewModel = new LoginViewModel();
         }
 
@@ -38,6 +40,11 @@ namespace Smartshop.ViewModels
         public void LoadLoginView()
         {
             SelectedViewModel = new LoginViewModel();
+        }
+
+        public void LoadNewInvoiceView()
+        {
+            SelectedViewModel = new InvoiceViewModel();
         }
     }
 }
