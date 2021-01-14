@@ -18,6 +18,12 @@ namespace Smartshop.ViewModels
         public ICommand SaveInvoiceCommand { get; set; }
         public ICommand DeleteInputCommand { get; set; }
 
+        private string curDate;
+        public string CurDate
+        {
+            get { return curDate; }
+            set { OnPropertyChanged(ref curDate, value); }
+        }
         private List<Customer> customers;
         public List<Customer> Customers
         {
@@ -46,6 +52,7 @@ namespace Smartshop.ViewModels
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
             DeleteInputCommand = new RelayCommand(DeleteInput);
             invNumber = Utils.GenerateInvoiceNumber();
+            CurDate = DateTime.Now.ToLongDateString();
         }
 
         public void SaveInvoice()
