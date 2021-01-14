@@ -17,6 +17,7 @@ namespace Smartshop.ViewModels
         //TODO: add implimentation 
         public ICommand SaveInvoiceCommand { get; set; }
         public ICommand DeleteInputCommand { get; set; }
+        public ICommand SelectedItemChanged { get; set; }
 
         private string curDate;
         public string CurDate
@@ -38,6 +39,17 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref customer, value); }
         }
 
+        private string selectedCustomer;
+        public string SelectedCustomer
+        {
+            get { return selectedCustomer; }
+            set 
+            {
+                OnPropertyChanged(ref selectedCustomer, value);
+                SelectedCustomerChanged(selectedCustomer);
+            }
+        }
+
         private string invNumber;
         public string InvNumber
         {
@@ -49,8 +61,10 @@ namespace Smartshop.ViewModels
         {
             using var db = new SmartshopDbContext();
             Customers = db.Customers.ToList();
+
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
             DeleteInputCommand = new RelayCommand(DeleteInput);
+
             invNumber = Utils.GenerateInvoiceNumber();
             CurDate = DateTime.Now.ToLongDateString();
         }
@@ -63,6 +77,12 @@ namespace Smartshop.ViewModels
         public void DeleteInput()
         {
 
+        }
+
+        public void SelectedCustomerChanged(string customerName)
+        {
+            using var db = new SmartshopDbContext();
+            Customer = db.Customers.Where(c => c.CompanyName == customerName).FirstOrDefault();
         }
     }
 }
