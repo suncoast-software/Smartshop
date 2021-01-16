@@ -39,20 +39,31 @@
                 <!-- Customers Button -->
                 <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" Margin="10 0 0 0">
                 
-            
                 <Grid Grid.Column="0">
-                    <Button  Content="Customers" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" Command="{Binding LoadCustomerViewCommand}"/>
+                    <Button  Content="Customers" 
+                             Background="{StaticResource ResourceKey=AccentLiteBrush}" 
+                             Margin="1" 
+                             Command="{Binding LoadCustomerViewCommand}"/>
                 </Grid>
                 <!-- Invoices Button-->
                 <Grid Grid.Column="1">
-                    <Button Content="Invoices" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" Command="{Binding LoadNewInvoiceViewCommand}"/>
+                    <Button Content="Invoices" 
+                            Background="{StaticResource ResourceKey=AccentLiteBrush}" 
+                            Margin="1" 
+                            Command="{Binding LoadNewInvoiceViewCommand}"/>
                 </Grid>
                 <!-- Inventory Button-->
                 <Grid Grid.Column="2">
-                    <Button Content="Inventory" Background="{StaticResource ResourceKey=AccentLiteBrush}" Margin="1" Command="{Binding LoadLoginViewCommand}"/>
+                    <Button Content="Inventory" 
+                            Background="{StaticResource ResourceKey=AccentLiteBrush}" 
+                            Margin="1" 
+                            Command="{Binding LoadLoginViewCommand}"/>
                 </Grid>
             </StackPanel>
-            <TextBlock Grid.Column="6" Grid.ColumnSpan="2" Text="{Binding Path=CurDate, Mode=OneWay}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="14" VerticalAlignment="Center" Margin="30 0 0 0"/>
+            <TextBlock Grid.Column="6" Grid.ColumnSpan="2" 
+                       Text="{Binding Path=CurDate, Mode=OneWay}" 
+                       Foreground="{StaticResource PrimaryDarkBrush}" 
+                       FontSize="14" VerticalAlignment="Center" Margin="30 0 0 0"/>
             
         </Grid>
        

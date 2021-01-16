@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 using Smartshop.Data;
 using Smartshop.Helpers;
 using Smartshop.Models;
@@ -17,6 +15,7 @@ namespace Smartshop.ViewModels
         //TODO: add implimentation 
         public ICommand SaveInvoiceCommand { get; set; }
         public ICommand DeleteInputCommand { get; set; }
+        public ICommand NewCustomerCommand { get; set; }
         public ICommand SelectedItemChanged { get; set; }
 
         private string curDate;
@@ -39,14 +38,14 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref customer, value); }
         }
 
-        private string selectedCustomer;
-        public string SelectedCustomer
+        private Customer selectedCustomer;
+        public Customer SelectedCustomer
         {
             get { return selectedCustomer; }
             set 
             {
                 OnPropertyChanged(ref selectedCustomer, value);
-                SelectedCustomerChanged(selectedCustomer);
+                SelectedCustomerChanged();
             }
         }
 
@@ -64,6 +63,7 @@ namespace Smartshop.ViewModels
 
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
             DeleteInputCommand = new RelayCommand(DeleteInput);
+            NewCustomerCommand = new RelayCommand(CreateNewCustomer);
 
             invNumber = Utils.GenerateInvoiceNumber();
             CurDate = DateTime.Now.ToLongDateString();
@@ -79,10 +79,18 @@ namespace Smartshop.ViewModels
 
         }
 
-        public void SelectedCustomerChanged(string customerName)
+        public void CreateNewCustomer()
+        {
+
+        }
+
+        public void SelectedCustomerChanged()
         {
             using var db = new SmartshopDbContext();
-            Customer = db.Customers.Where(c => c.CompanyName == customerName).FirstOrDefault();
+            Customer = db.Customers.Where(c => c.CompanyName == SelectedCustomer.CompanyName)
+                .Include(i => i.Invoices).ToList()
+                .FirstOrDefault();
+           
         }
     }
 }

@@ -17,8 +17,8 @@ namespace Smartshop.Models
             set { OnPropertyChanged(ref _id, value); }
         }
 
-        private int _customerId;
-        public int CustomerId
+        private ulong _customerId;
+        public ulong CustomerId
         {
             get { return _customerId; }
             set { OnPropertyChanged(ref _customerId, value); }

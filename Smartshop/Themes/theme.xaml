@@ -6,12 +6,14 @@
     <Color x:Key="PrimaryLite">#819BA6</Color>
     <Color x:Key="AccentLite">#BFB6AE</Color>
     <Color x:Key="AccentDark">#A6958F</Color>
+    <Color x:Key="PrimaryOrange">#F59B02</Color>
 
     <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryDarkBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="PrimaryLiteBrush" Color="{StaticResource PrimaryLite}"/>
     <SolidColorBrush x:Key="AccentLiteBrush" Color="{StaticResource AccentLite}"/>
     <SolidColorBrush x:Key="AccentDarkBrush" Color="{StaticResource AccentLite}"/>
+    <SolidColorBrush x:Key="PrimaryOrangeBrush" Color="{StaticResource PrimaryOrange}"/>
 
     <LinearGradientBrush x:Key="DarkToLiteBlueGradient" StartPoint="0, 0" EndPoint="1, 1">
         <GradientStop Color="{StaticResource PrimaryLite}" Offset="1.0"/>
