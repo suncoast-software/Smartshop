@@ -19,9 +19,9 @@ namespace Smartshop.Views
     /// <summary>
     /// Interaction logic for NewInvoiceView.xaml
     /// </summary>
-    public partial class NewInvoiceView : UserControl
+    public partial class ViewInvoiceView : UserControl
     {
-        public NewInvoiceView()
+        public ViewInvoiceView()
         {
             InitializeComponent();
             DataContext = new InvoiceViewModel();

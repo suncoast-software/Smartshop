@@ -49,6 +49,17 @@ namespace Smartshop.ViewModels
             }
         }
 
+        private Invoice selectedInvoice;
+        public Invoice SelectedInvoice
+        {
+            get { return selectedInvoice; }
+            set 
+            { 
+                OnPropertyChanged(ref selectedInvoice, value);
+                SelectedInvoiceChanged();
+            }
+        }
+
         private string invNumber;
         public string InvNumber
         {
@@ -71,17 +82,17 @@ namespace Smartshop.ViewModels
 
         public void SaveInvoice()
         {
-
+            throw new NotImplementedException("Not Implimented!");
         }
 
         public void DeleteInput()
         {
-
+            throw new NotImplementedException("Not Implimented!");
         }
 
         public void CreateNewCustomer()
         {
-
+            throw new NotImplementedException("Not Implimented!");
         }
 
         public void SelectedCustomerChanged()
@@ -90,7 +101,12 @@ namespace Smartshop.ViewModels
             Customer = db.Customers.Where(c => c.CompanyName == SelectedCustomer.CompanyName)
                 .Include(i => i.Invoices).ToList()
                 .FirstOrDefault();
-           
+        }
+
+        public void SelectedInvoiceChanged()
+        {
+            using var db = new SmartshopDbContext();
+            selectedInvoice = db.Invoices.Where(i => i.Id == 1).FirstOrDefault();
         }
     }
 }

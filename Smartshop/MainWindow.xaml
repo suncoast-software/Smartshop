@@ -16,7 +16,7 @@
             <v:NewCustomerView/>
         </DataTemplate>
         <DataTemplate x:Name="InvoiceViewTemplate" DataType="{x:Type vm:InvoiceViewModel}">
-            <v:NewInvoiceView/>
+            <v:ViewInvoiceView/>
         </DataTemplate>
     </Window.Resources>
     <DockPanel>

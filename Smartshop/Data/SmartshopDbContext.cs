@@ -16,6 +16,8 @@ namespace Smartshop.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Invoice> Invoices { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -29,6 +31,7 @@ namespace Smartshop.Data
             modelBuilder.Entity<AppUser>().HasKey(m => m.Id);
             modelBuilder.Entity<Customer>().HasKey(m => m.Id);
             modelBuilder.Entity<Item>().HasKey(m => m.Id);
+            modelBuilder.Entity<Invoice>().HasKey(m => m.Id);
         }
     }
 }
