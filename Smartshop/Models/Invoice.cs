@@ -72,13 +72,5 @@ namespace Smartshop.Models
             get { return _total; }
             set { OnPropertyChanged(ref _total, value); }
         }
-
-        private ICollection<Item> _items;
-        public ICollection<Item> Items
-        {
-            get { return _items; }
-            set { OnPropertyChanged(ref _items, value); }
-        }
-
     }
 }

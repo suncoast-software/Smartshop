@@ -60,6 +60,13 @@ namespace Smartshop.ViewModels
             }
         }
 
+        private ICollection<Item> items;
+        public ICollection<Item> Items
+        {
+            get { return items; }
+            set { OnPropertyChanged(ref items, value); }
+        }
+
         private string invNumber;
         public string InvNumber
         {
@@ -106,7 +113,7 @@ namespace Smartshop.ViewModels
         public void SelectedInvoiceChanged()
         {
             using var db = new SmartshopDbContext();
-            selectedInvoice = db.Invoices.Where(i => i.Id == 1).FirstOrDefault();
+            Items = db.Items.Where(i => i.InvoiceNumber == SelectedInvoice.InvoiceNumber).ToList();
         }
     }
 }

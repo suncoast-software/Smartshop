@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Smartshop.Data;
@@ -9,9 +10,10 @@ using Smartshop.Data;
 namespace Smartshop.Migrations
 {
     [DbContext(typeof(SmartshopDbContext))]
-    partial class SmartshopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210117034606_EditModels-Item-Invoice")]
+    partial class EditModelsItemInvoice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,8 +129,8 @@ namespace Smartshop.Migrations
                     b.Property<string>("Desc")
                         .HasColumnType("text");
 
-                    b.Property<decimal>("InvoiceNumber")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<int>("InvoiceNumber")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("boolean");

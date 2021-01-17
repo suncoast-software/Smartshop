@@ -68,7 +68,7 @@
         </Grid>
        
         <!-- Content -->
-        <Grid DockPanel.Dock="Bottom" Background="{StaticResource DarkToLiteBlueBGGradient}" >
+        <Grid DockPanel.Dock="Bottom" Background="{StaticResource PrimaryGreyBrush}" >
             <ContentControl Content="{Binding Path=SelectedViewModel}" Margin="20"/>
         </Grid>
     </DockPanel>

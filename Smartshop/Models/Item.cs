@@ -16,6 +16,13 @@ namespace Smartshop.Models
             set { OnPropertyChanged(ref id, value); }
         }
 
+        private ulong invoiceNumber;
+        public ulong InvoiceNumber
+        {
+            get { return invoiceNumber; }
+            set { OnPropertyChanged(ref invoiceNumber, value); }
+        }
+
         private ulong itemNumber;
         public ulong ItemNumber
         {
