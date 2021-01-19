@@ -3,10 +3,424 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Smartshop.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Background="{StaticResource AccentLiteBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="New Invoice" 
+                               Grid.Column="0"  
+                               Grid.Row="0"  
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center" 
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Margin="10 0 0 0"  
+                               Foreground="{StaticResource PrimaryDarkBrush}"/>
+                    <materialDesign:PackIcon Kind="Post" Height="40" Width="40" Opacity=".6" Margin="20 0 0 0 "/>
+                </StackPanel>
+
+                <!--Tool Buttons -->
+                <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 2 10 0">
+                    <Button Command="{Binding NewCustomerCommand}" Margin="2">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="PersonAdd" Width="26" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding SaveInvoiceCommand}" Margin="2">
+                        <Button.Content>
+                            <Image Source="\Assets\Images\saveIcon.png"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding DeleteInputCommand}" Margin="2">
+                        <Button.Content>
+                            <Image Source="\Assets\Images\deleteIcon.png"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <!-- END TOOL BUTTONS -->
+
+            </Grid>
+        </StackPanel>
+
+        <Grid  Grid.Row="1" 
+               Grid.ColumnSpan="4" 
+              >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition  Height="40"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- CUSTOMER HEADER -->
+            <Grid Height="30" 
+                  Grid.Row="0" 
+                  Margin="0 4 0 0">
+
+                <Border Grid.Row="0" Grid.Column="0" 
+                        Background="{StaticResource PrimaryDarkBrush}" 
+                        CornerRadius="12" Margin="10,0,10,0">
+                    <TextBlock Text="Customer" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Left" 
+                                FontSize="16" 
+                                FontWeight="Bold"
+                                Foreground="{StaticResource AccentLiteBrush}" Margin="20 0 0 0"/>
+                </Border>
+            </Grid>
+            <!-- END CUSTOMER HEADER -->
+
+            <!-- CUSTOMER DETAILS -->
+            <Grid Grid.Row="1" Margin="10, 0, 10, 10">
+                <Grid  Margin="10, 0" VerticalAlignment="Top" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="225"/>
+                        <ColumnDefinition Width="225"/>
+                        <ColumnDefinition Width="225"/>
+                        <ColumnDefinition Width="225"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Column="1" Grid.Row="0"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             Text="{Binding Customer.CustomerNumber, Mode=OneWay}"
+                             materialDesign:HintAssist.Hint="Customer Number"
+                             materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                             Foreground="{StaticResource AccentLiteBrush}"
+                             Height="50" Width="200"
+                             IsReadOnly="True"
+                             Margin="4, 0, 0, 4" 
+                             FontSize="18"
+                             VerticalAlignment="Top"/>
+
+                    <ComboBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                              Width="200" Height="50"
+                              materialDesign:HintAssist.Hint="Customers" 
+                              materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                              Foreground="{StaticResource AccentLiteBrush}"
+                              ItemsSource="{Binding Customers}" 
+                              DisplayMemberPath="CompanyName" 
+                              SelectedItem="{Binding SelectedCustomer}" 
+                              Margin="4, 0, 0, 4" 
+                              FontSize="18"
+                              VerticalAlignment="Top"/>
+
+                    <TextBox Grid.Row="1" Grid.Column="0"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             materialDesign:HintAssist.Hint="Company Name" 
+                             materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                             Foreground="{StaticResource AccentLiteBrush}"
+                             IsReadOnly="True"
+                             Height="50" Width="200" 
+                             Margin="4, 0, 0, 4" 
+                             FontSize="16"
+                             HorizontalContentAlignment="Left"
+                             VerticalAlignment="Top"
+                             Text="{Binding SelectedCustomer.CompanyName, Mode=TwoWay}" />
+
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             materialDesign:HintAssist.Hint="Contact Name" 
+                             materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                             Foreground="{StaticResource AccentLiteBrush}"
+                             IsReadOnly="True"
+                             Height="50" Width="200" 
+                             VerticalAlignment="Top"
+                             Margin="4, 0, 0, 4" 
+                             FontSize="18"
+                             Text="{Binding SelectedCustomer.ContactName, Mode=TwoWay}" />
+
+                    <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             materialDesign:HintAssist.Hint="Email" 
+                             materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                             Foreground="{StaticResource AccentLiteBrush}"
+                             IsReadOnly="True"
+                             Height="50" Width="200" 
+                             VerticalAlignment="Top"
+                             Margin="4, 0, 0, 4" 
+                             FontSize="18"
+                             Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" />
+
+                    <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             materialDesign:HintAssist.Hint="Phone" 
+                             materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                             Foreground="{StaticResource AccentLiteBrush}"
+                             IsReadOnly="True"
+                             Height="50" Width="200" 
+                             VerticalAlignment="Top"
+                             Margin="4, 0, 0, 4" 
+                             FontSize="18"
+                             Text="{Binding SelectedCustomer.Phone, Mode=TwoWay}" />
+                </Grid>
+            </Grid>
+            <!-- END CUSTOMER DETAILS -->
+
+            <!-- ADDRESS HEADER -->
+            <Grid Grid.Row="2" 
+                  VerticalAlignment="Top"
+                   Margin="0 4">
+                <Border 
+                        Background="{StaticResource PrimaryDarkBrush}" 
+                        Height="30" 
+                        CornerRadius="12" 
+                        Margin="10 0">
+
+                    <TextBlock Text="Address" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Left" 
+                               Margin="20 0 0 0" 
+                               FontSize="16" 
+                               FontWeight="Bold"
+                               Foreground="{StaticResource AccentLiteBrush}"/>
+                </Border>
+
+            </Grid>
+            <!-- END ADDRESS HEADER -->
+
+            <!-- ADDRESS DETAILS -->
+            <Grid Grid.Row="3" 
+                  Margin="10, 0,10, 10" 
+                  VerticalAlignment="Top">
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Text="{Binding SelectedCustomer.Address, Mode=TwoWay}" 
+                         materialDesign:HintAssist.Hint="Address" 
+                         materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                         Foreground="{StaticResource AccentLiteBrush}"
+                         Height="50"
+                         VerticalAlignment="Top"
+                         HorizontalAlignment="Left"
+                         Margin="10, 0"
+                         FontSize="18" />
+
+            </Grid>
+            <!-- END ADDRESS DETAILS -->
+
+            <!-- INVOICE DETAILS HEADER -->
+            <Border Grid.Row="4"  
+                    Background="{StaticResource PrimaryDarkBrush}" 
+                    Height="30" 
+                    CornerRadius="12" 
+                    Margin="10 4">
+
+                <TextBlock Text="Invoice Details" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left" 
+                           Margin="20 0 0 0" 
+                           FontSize="16" 
+                           FontWeight="Bold"
+                           Foreground="{StaticResource AccentLiteBrush}"/>
+            </Border>
+            <!-- END INVOICE DETAILS HEADER -->
+
+            <!-- INVOICE DETAILS -->
+            <Grid Grid.Row="5">
+                <ScrollViewer Height="Auto" 
+                              VerticalScrollBarVisibility="Visible"
+                              CanContentScroll="True">
+
+                    <Grid Height="Auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical">
+                            <!-- ROW 1 -->
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                                     ItemsSource="{Binding Customer.Invoices}"
+                                     DisplayMemberPath="InvoiceNumber" 
+                                     SelectedItem="{Binding SelectedInvoice}" 
+                                     materialDesign:HintAssist.Hint="Invoices"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     Height="50" Width="200"  
+                                     IsEnabled="True" 
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedInvoice.InvoiceNumber}"
+                                     materialDesign:HintAssist.Hint="Invoice Number"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="200"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedCustomer.CompanyName}"
+                                     materialDesign:HintAssist.Hint="Customer Name"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="200"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedInvoice.DueDate}"
+                                     materialDesign:HintAssist.Hint="Due Date"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="200"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+
+                            </StackPanel>
+                            <!-- END ROW 1 -->
+                            <!-- ROW 2 -->
+                            <StackPanel Orientation="Horizontal">
+                                <!-- TITLE -->
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedInvoice.Title}"
+                                     materialDesign:HintAssist.Hint="Title"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="200"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+
+                                <!-- CREATED DATE -->
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedInvoice.CreatedDate}"
+                                     materialDesign:HintAssist.Hint="Created Date"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="200"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+
+                                <!-- CREATED BY -->
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedInvoice.CreatedBy}"
+                                     materialDesign:HintAssist.Hint="Created By"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="200"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+
+                                <!-- TOTAL -->
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedInvoice.Total}"
+                                     materialDesign:HintAssist.Hint="Total"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="200"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+                            </StackPanel>
+                            <!-- END ROW 2 -->
+
+                            <!-- ROW 3 -->
+                            <StackPanel Orientation="Horizontal">
+
+                                <!-- DESCRIPTION -->
+                                <TextBox  Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Text="{Binding SelectedInvoice.Desc}"
+                                     materialDesign:HintAssist.Hint="Description"
+                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                     Foreground="{StaticResource AccentLiteBrush}"
+                                     IsReadOnly="True"
+                                     Height="50" Width="Auto"  
+                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     VerticalAlignment="Top"/>
+
+                            </StackPanel>
+                            <!-- END ROW 3 -->
+                            <!-- ROW 4 -->
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <!-- INVOICE DETAILS HEADER -->
+                                    <Border 
+                                        Background="{StaticResource PrimaryDarkBrush}" 
+                                        Height="30"
+                                        Width="400"
+                                        CornerRadius="12" 
+                                        Margin="10 4">
+
+                                        <TextBlock Text="Item Details" 
+                                           VerticalAlignment="Center" 
+                                           HorizontalAlignment="Left" 
+                                           Margin="20 0 0 0" 
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           Foreground="{StaticResource AccentLiteBrush}"/>
+                                    </Border>
+                                    <!-- END INVOICE DETAILS HEADER -->
+                                </StackPanel>
+
+
+                                <!-- ITEMS -->
+                                <ListView Grid.Row="0"
+                                     Style="{StaticResource MaterialDesignListView}" 
+                                     materialDesign:ListViewAssist.ListViewItemPadding="10" 
+                                     ItemsSource="{Binding Items}"
+                                     Width="Auto"  
+                                     Margin="20, 10, 0, 4" 
+                                     VerticalAlignment="Top">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Item #" DisplayMemberBinding="{Binding ItemNumber}"/>
+                                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Desc}"/>
+                                            <GridViewColumn Header="Available" DisplayMemberBinding="{Binding IsAvailable}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+
+                            </StackPanel>
+                            <!-- END ROW 3 -->
+
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+            <!-- END INVOICE DETAILS -->
+
+        </Grid>
+
     </Grid>
 </UserControl>

@@ -58,8 +58,6 @@ namespace Smartshop.ViewModels
 
         public async void SaveCustomer()
         {
-            //TODO: finish Item model
-            //TODO: add model to dbContext
 
             Customer cust = new Customer()
             {

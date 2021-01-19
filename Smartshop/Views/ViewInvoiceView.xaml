@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:local="clr-namespace:Smartshop.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="900">
+             d:DesignHeight="850" d:DesignWidth="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -36,6 +37,11 @@
                 <!--Tool Buttons -->
                 <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 2 10 0">
                     <Button Command="{Binding NewCustomerCommand}" Margin="2">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="PlusBox" Width="26" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding NewInvoiceCommand}" Margin="2">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="PersonAdd" Width="26" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button.Content>
@@ -110,18 +116,19 @@
                              Margin="4, 0, 0, 4" 
                              FontSize="18"
                              VerticalAlignment="Top"/>
-                    
+
                     <ComboBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                               Width="200" Height="50"
                               materialDesign:HintAssist.Hint="Customers" 
                               materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
                               Foreground="{StaticResource AccentLiteBrush}"
-                              ItemsSource="{Binding Customers}" 
+                              ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                               DisplayMemberPath="CompanyName" 
-                              SelectedItem="{Binding SelectedCustomer}" 
+                              SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="4, 0, 0, 4" 
                               FontSize="18"
-                              VerticalAlignment="Top"/>
+                              VerticalAlignment="Top">
+                    </ComboBox>
                     
                     <TextBox Grid.Row="1" Grid.Column="0"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                              materialDesign:HintAssist.Hint="Company Name" 
@@ -206,7 +213,7 @@
                          Height="50"
                          VerticalAlignment="Top"
                          HorizontalAlignment="Left"
-                         Margin="10, 0"
+                         Margin="10 10 0 0"
                          FontSize="18" />
 
             </Grid>
@@ -217,7 +224,7 @@
                     Background="{StaticResource PrimaryDarkBrush}" 
                     Height="30" 
                     CornerRadius="12" 
-                    Margin="10 4">
+                    Margin="10 10 0 0 ">
                 
                 <TextBlock Text="Invoice Details" 
                            VerticalAlignment="Center" 
@@ -356,7 +363,7 @@
                                      Foreground="{StaticResource AccentLiteBrush}"
                                      IsReadOnly="True"
                                      Height="50" Width="Auto"  
-                                     Margin="20, 10, 0, 4" FontSize="18"
+                                     Margin="20, 0, 0, 4" FontSize="18"
                                      VerticalAlignment="Top"/>
                                 
                             </StackPanel>
@@ -370,7 +377,7 @@
                                         Height="30"
                                         Width="400"
                                         CornerRadius="12" 
-                                        Margin="10 4">
+                                        Margin="10 10">
 
                                         <TextBlock Text="Item Details" 
                                            VerticalAlignment="Center" 
@@ -388,13 +395,13 @@
                                 <ListView Grid.Row="0"
                                      Style="{StaticResource MaterialDesignListView}" 
                                      materialDesign:ListViewAssist.ListViewItemPadding="10" 
-                                     ItemsSource="{Binding Items}"
+                                     ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}"
                                      Width="Auto"  
-                                     Margin="20, 10, 0, 4" 
+                                     Margin="20, 0, 0, 4" 
                                      VerticalAlignment="Top">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn Header="Item #" DisplayMemberBinding="{Binding ItemNumber}"/>
+                                            <GridViewColumn Header="Item #" DisplayMemberBinding="{Binding ItemNumber}" />
                                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                                             <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
                                             <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Desc}"/>

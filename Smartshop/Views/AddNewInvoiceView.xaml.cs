@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Smartshop.ViewModels;
 
 namespace Smartshop.Views
 {
@@ -23,6 +24,7 @@ namespace Smartshop.Views
         public AddNewInvoiceView()
         {
             InitializeComponent();
+            DataContext = new AddNewInvoiceViewModel();
         }
     }
 }

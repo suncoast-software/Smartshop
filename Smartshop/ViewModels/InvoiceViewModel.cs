@@ -12,10 +12,10 @@ namespace Smartshop.ViewModels
 {
     public class InvoiceViewModel : BaseViewModel
     {
-        //TODO: add implimentation 
         public ICommand SaveInvoiceCommand { get; set; }
         public ICommand DeleteInputCommand { get; set; }
         public ICommand NewCustomerCommand { get; set; }
+        public ICommand NewInvoiceCommand { get; set; }
         public ICommand SelectedItemChanged { get; set; }
 
         private string curDate;
@@ -82,9 +82,14 @@ namespace Smartshop.ViewModels
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
             DeleteInputCommand = new RelayCommand(DeleteInput);
             NewCustomerCommand = new RelayCommand(CreateNewCustomer);
+            NewInvoiceCommand = new RelayCommand(CreateNewInvoice);
 
-            invNumber = Utils.GenerateInvoiceNumber();
-            CurDate = DateTime.Now.ToLongDateString();
+            invNumber = Utils.GenerateId(IdType.INVOICE);
+        }
+
+        private void CreateNewInvoice()
+        {
+            throw new NotImplementedException();
         }
 
         public void SaveInvoice()
@@ -106,14 +111,24 @@ namespace Smartshop.ViewModels
         {
             using var db = new SmartshopDbContext();
             Customer = db.Customers.Where(c => c.CompanyName == SelectedCustomer.CompanyName)
-                .Include(i => i.Invoices).ToList()
+                .Include(i => i.Invoices)
                 .FirstOrDefault();
         }
 
         public void SelectedInvoiceChanged()
         {
-            using var db = new SmartshopDbContext();
-            Items = db.Items.Where(i => i.InvoiceNumber == SelectedInvoice.InvoiceNumber).ToList();
+            
+            if (SelectedInvoice == null)
+            {
+                Items = null;
+                return;
+            }
+            else
+            {
+                using var db = new SmartshopDbContext();
+                Items = db.Items.Where(i => i.InvoiceNumber == SelectedInvoice.InvoiceNumber).ToList();
+            }
+                
         }
     }
 }
