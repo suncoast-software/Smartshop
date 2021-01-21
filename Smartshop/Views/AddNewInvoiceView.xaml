@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Smartshop.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -106,17 +106,6 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Column="1" Grid.Row="0"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                             Text="{Binding Customer.CustomerNumber, Mode=OneWay}"
-                             materialDesign:HintAssist.Hint="Customer Number"
-                             materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
-                             Foreground="{StaticResource AccentLiteBrush}"
-                             Height="50" Width="200"
-                             IsReadOnly="True"
-                             Margin="4, 0, 0, 4" 
-                             FontSize="18"
-                             VerticalAlignment="Top"/>
 
                     <ComboBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                               Width="200" Height="50"
@@ -129,6 +118,20 @@
                               Margin="4, 0, 0, 4" 
                               FontSize="18"
                               VerticalAlignment="Top"/>
+                    
+                    <TextBox Grid.Column="1" Grid.Row="0"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             Text="{Binding Customer.CustomerNumber, Mode=OneWay}"
+                             materialDesign:HintAssist.Hint="Customer Number"
+                             materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                             Foreground="{StaticResource AccentLiteBrush}"
+                             Height="50" Width="200"
+                             IsReadOnly="True"
+                             Margin="4, 0, 0, 4" 
+                             FontSize="18"
+                             VerticalAlignment="Top"/>
+                    
+
 
                     <TextBox Grid.Row="1" Grid.Column="0"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                              materialDesign:HintAssist.Hint="Company Name" 
@@ -238,10 +241,7 @@
 
             <!-- INVOICE DETAILS -->
             <Grid Grid.Row="5">
-                <ScrollViewer Height="Auto" 
-                              VerticalScrollBarVisibility="Visible"
-                              CanContentScroll="True">
-
+               
                     <Grid Height="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -252,21 +252,10 @@
                         <StackPanel Orientation="Vertical">
                             <!-- ROW 1 -->
                             <StackPanel Orientation="Horizontal">
-                                <ComboBox  Grid.Row="0"
-                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-                                     ItemsSource="{Binding Customer.Invoices}"
-                                     DisplayMemberPath="InvoiceNumber" 
-                                     SelectedItem="{Binding SelectedInvoice}" 
-                                     materialDesign:HintAssist.Hint="Invoices"
-                                     materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
-                                     Foreground="{StaticResource AccentLiteBrush}"
-                                     Height="50" Width="200"  
-                                     IsEnabled="True" 
-                                     Margin="20, 10, 0, 4" FontSize="18"
-                                     VerticalAlignment="Top"/>
+                               
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedInvoice.InvoiceNumber}"
+                                     Text="{Binding NewInvoiceNumber}"
                                      materialDesign:HintAssist.Hint="Invoice Number"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -277,7 +266,7 @@
 
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedCustomer.CompanyName}"
+                                     Text="{Binding Customer.CompanyName, Mode=OneWayToSource}"
                                      materialDesign:HintAssist.Hint="Customer Name"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -288,7 +277,7 @@
 
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedInvoice.DueDate}"
+                                     Text="{Binding Invoice.DueDate, Mode=OneWayToSource}"
                                      materialDesign:HintAssist.Hint="Due Date"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -304,7 +293,7 @@
                                 <!-- TITLE -->
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedInvoice.Title}"
+                                     Text="{Binding Invoice.Title, Mode=OneWayToSource}"
                                      materialDesign:HintAssist.Hint="Title"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -316,7 +305,7 @@
                                 <!-- CREATED DATE -->
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedInvoice.CreatedDate}"
+                                     Text="{Binding Invoice.CreatedDate, Mode=OneWayToSource}"
                                      materialDesign:HintAssist.Hint="Created Date"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -328,7 +317,7 @@
                                 <!-- CREATED BY -->
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedInvoice.CreatedBy}"
+                                     Text="{Binding Invoice.CreatedBy, Mode=OneWayToSource}"
                                      materialDesign:HintAssist.Hint="Created By"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -340,7 +329,7 @@
                                 <!-- TOTAL -->
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedInvoice.Total}"
+                                     Text="{Binding Invoice.Total, Mode=OneWayToSource}"
                                      materialDesign:HintAssist.Hint="Total"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -357,7 +346,7 @@
                                 <!-- DESCRIPTION -->
                                 <TextBox  Grid.Row="0"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding SelectedInvoice.Desc}"
+                                     Text="{Binding Invoice.Desc, Mode=OneWayToSource}"
                                      materialDesign:HintAssist.Hint="Description"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -379,7 +368,7 @@
                                         CornerRadius="12" 
                                         Margin="10 4">
 
-                                        <TextBlock Text="Item Details" 
+                                        <TextBlock Text="Add New Item" 
                                            VerticalAlignment="Center" 
                                            HorizontalAlignment="Left" 
                                            Margin="20 0 0 0" 
@@ -392,31 +381,94 @@
 
 
                                 <!-- ITEMS -->
-                                <ListView Grid.Row="0"
+                            <ScrollViewer Height="Auto" 
+                              VerticalScrollBarVisibility="Visible"
+                              CanContentScroll="True">
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <ComboBox  Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                                                   Width="200" Height="50"
+                                                   materialDesign:HintAssist.Hint="Item Name" 
+                                                   materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
+                                                   Foreground="{StaticResource AccentLiteBrush}"
+                                                   ItemsSource="{Binding Items}" 
+                                                   DisplayMemberPath="Name" 
+                                                   SelectedItem="{Binding Item.Name}" 
+                                                   Margin="10, 0, 0, 10" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Top"/>
+                                        
+                                        <TextBox  materialDesign:HintAssist.Hint="Item #"
+                                                  materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                                  Foreground="{StaticResource AccentLiteBrush}" 
+                                                  Text="{Binding Item.ItemNumber}"
+                                                  Margin="10, 0, 0, 10" 
+                                                  Width="200"
+                                                  Height="50"
+                                                  FontSize="18"
+                                                  VerticalAlignment="Top"/>
+
+                                        <TextBox  materialDesign:HintAssist.Hint="Item Description"
+                                                  materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                                  Foreground="{StaticResource AccentLiteBrush}" 
+                                                  Text="{Binding Item.Desc}"
+                                                  Margin="10, 0, 0, 10" 
+                                                  Width="200"
+                                                  Height="50"
+                                                  FontSize="18"
+                                                  VerticalAlignment="Top"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBox  materialDesign:HintAssist.Hint="Price"
+                                                  materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                                  Foreground="{StaticResource AccentLiteBrush}" 
+                                                  Text="{Binding Item.Price}"
+                                                  Margin="10, 0, 0, 10" 
+                                                  Width="200"
+                                                  Height="50"
+                                                  FontSize="18"
+                                                  VerticalAlignment="Top"/>
+
+                                        <TextBox  materialDesign:HintAssist.Hint="Is Available"
+                                                  materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
+                                                  Foreground="{StaticResource AccentLiteBrush}" 
+                                                  Text="{Binding Item.IsAvailable}"
+                                                  Margin="10, 0, 0, 10" 
+                                                  Width="200"
+                                                  Height="50"
+                                                  FontSize="18"
+                                                  VerticalAlignment="Top"/>
+                                    </StackPanel>
+                                    <ListView Grid.Row="0"
                                      Style="{StaticResource MaterialDesignListView}" 
                                      materialDesign:ListViewAssist.ListViewItemPadding="10" 
                                      ItemsSource="{Binding Items}"
                                      Width="Auto"  
                                      Margin="20, 10, 0, 4" 
                                      VerticalAlignment="Top">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="Item #" DisplayMemberBinding="{Binding ItemNumber}"/>
-                                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
-                                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Desc}"/>
-                                            <GridViewColumn Header="Available" DisplayMemberBinding="{Binding IsAvailable}"/>
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>
+                                        <ListView.View>
+                                            <GridView>
 
+                                                <GridViewColumn Header="Item #" DisplayMemberBinding="{Binding ItemNumber}"/>
+                                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Desc}"/>
+                                                <GridViewColumn Header="Available" DisplayMemberBinding="{Binding IsAvailable}"/>
 
-                            </StackPanel>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </StackPanel>
+                            </ScrollViewer>
+
+                        </StackPanel>
                             <!-- END ROW 3 -->
 
                         </StackPanel>
                     </Grid>
-                </ScrollViewer>
+              
             </Grid>
             <!-- END INVOICE DETAILS -->
 

@@ -50,6 +50,13 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref address, value); }
         }
 
+        private Customer cust;
+        public Customer Cust
+        {
+            get { return cust; }
+            set { OnPropertyChanged(ref cust, value); }
+        }
+
         public AddNewCustomerViewModel()
         {
             SaveCustomerCommand = new RelayCommand(SaveCustomer);
@@ -58,22 +65,19 @@ namespace Smartshop.ViewModels
 
         public async void SaveCustomer()
         {
+            
+            Cust.CompanyName = companyName;
+            Cust.ContactName = contactName;
+            Cust.Email = email;
+            Cust.Phone = phone;
+            Cust.Address = address;
 
-            Customer cust = new Customer()
+            if (IsValid())
             {
-                CompanyName = companyName,
-                ContactName = contactName,
-                Email = email,
-                Phone = phone,
-                Address = address
-            };
-
-            if (cust.CompanyName == "")
-                return;
-
-            using var db = new SmartshopDbContext();
-            await db.AddAsync(cust);
-            await db.SaveChangesAsync();
+                using var db = new SmartshopDbContext();
+                await db.AddAsync(cust);
+                await db.SaveChangesAsync();
+            }
         }
 
         public void DeleteInputs()
@@ -83,6 +87,12 @@ namespace Smartshop.ViewModels
             Email = "";
             Phone = "";
             Address = "";
+        }
+
+        private bool IsValid()
+        {
+            var valid = Cust != null ? true : false;
+            return valid;
         }
     }
 }

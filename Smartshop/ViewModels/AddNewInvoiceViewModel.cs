@@ -25,6 +25,13 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref customers, value); }
         }
 
+        private List<Item> items;
+        public List<Item> Items
+        {
+            get { return items; }
+            set { OnPropertyChanged(ref items, value); }
+        }
+
         private Customer customer;
         public Customer Customer
         {
@@ -39,10 +46,36 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref invoice, value); }
         }
 
+        private string newInvoiceNumber;
+        public string NewInvoiceNumber
+        {
+            get { return newInvoiceNumber; }
+            set { OnPropertyChanged(ref newInvoiceNumber, value); }
+        }
+
+        private Item selectedItem;
+        public Item SelectedItem
+        {
+            get { return selectedItem; }
+            set 
+            {
+                SelectedItemChanged();
+                OnPropertyChanged(ref selectedItem, value); 
+            }
+        }
+
+        private string itemName;
+        public string ItemName
+        {
+            get { return itemName; }
+            set { OnPropertyChanged(ref itemName, value); }
+        }
+
         public AddNewInvoiceViewModel()
         {
             ClearInputCommand = new RelayCommand(ClearInputs);
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
+            NewInvoiceNumber = Helpers.Utils.GenerateId(IdType.INVOICE);
             Customers = GetCustomersByName();
         }
 
@@ -60,6 +93,12 @@ namespace Smartshop.ViewModels
         {
             using var db = new SmartshopDbContext();
             return db.Customers.Select(c => c.CompanyName).ToList();
+        }
+
+        public void SelectedItemChanged()
+        {
+            using var db = new SmartshopDbContext();
+            Items = db.Items.ToList();
         }
     }
 }
