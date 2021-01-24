@@ -17,9 +17,10 @@ namespace Smartshop.ViewModels
 
         public ICommand ClearInputCommand { get; set; }
         public ICommand SaveInvoiceCommand { get; set; }
+        public ICommand NewCustomerCommand { get; set; }
 
-        private List<String> customers;
-        public List<String> Customers
+        private List<Customer> customers;
+        public List<Customer> Customers
         {
             get { return customers; }
             set { OnPropertyChanged(ref customers, value); }
@@ -60,8 +61,15 @@ namespace Smartshop.ViewModels
             set 
             {
                 SelectedItemChanged();
-                OnPropertyChanged(ref selectedItem, value); 
+                OnPropertyChanged(ref selectedItem, value);
             }
+        }
+
+        private Customer selectedCustomer;
+        public Customer SelectedCustomer
+        {
+            get { return selectedCustomer; }
+            set { OnPropertyChanged(ref selectedCustomer, value); }
         }
 
         private string itemName;
@@ -75,8 +83,15 @@ namespace Smartshop.ViewModels
         {
             ClearInputCommand = new RelayCommand(ClearInputs);
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
+            NewCustomerCommand = new RelayCommand(LoadNewCustomerView);
             NewInvoiceNumber = Helpers.Utils.GenerateId(IdType.INVOICE);
-            Customers = GetCustomersByName();
+            GetCustomersByName();
+            LoadItems();
+        }
+
+        private void LoadNewCustomerView()
+        {
+
         }
 
         public void SaveInvoice()
@@ -89,16 +104,30 @@ namespace Smartshop.ViewModels
             
         }
 
-        private List<String> GetCustomersByName()
+        private void GetCustomersByName()
         {
             using var db = new SmartshopDbContext();
-            return db.Customers.Select(c => c.CompanyName).ToList();
+            Customers = db.Customers.ToList();
+        }
+
+        private void LoadItems()
+        {
+            using var db = new SmartshopDbContext();
+            Items = db.Items.OrderBy(x => x.Name).Distinct().ToList();
         }
 
         public void SelectedItemChanged()
-        {
-            using var db = new SmartshopDbContext();
-            Items = db.Items.ToList();
+        { 
+            if (SelectedItem == null)
+            {
+                return;
+            }
+            else
+            {
+                using var db = new SmartshopDbContext();
+                SelectedItem = db.Items.Where(x => x.Name == ItemName).FirstOrDefault();
+            }
+
         }
     }
 }

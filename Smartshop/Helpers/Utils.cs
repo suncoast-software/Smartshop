@@ -44,7 +44,7 @@ namespace Smartshop.Helpers
                         var num = rnd.Next(1, 9);
                         builder.Append(num);
                     }
-                    return prefix + builder.ToString();
+                    return builder.ToString();
 
                 case IdType.INVOICE:
                     prefix = "300-";

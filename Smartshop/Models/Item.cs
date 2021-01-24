@@ -51,11 +51,11 @@ namespace Smartshop.Models
             set { OnPropertyChanged(ref price, value); }
         }
 
-        private bool isAvalible;
-        public bool IsAvailable
+        private int quantity;
+        public int Quantity
         {
-            get { return isAvalible; }
-            set { OnPropertyChanged(ref isAvalible, value); }
+            get { return quantity; }
+            set { OnPropertyChanged(ref quantity, value); }
         }
     }
 }

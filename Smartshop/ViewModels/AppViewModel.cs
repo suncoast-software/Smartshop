@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Smartshop.Helpers;
 using Smartshop.Utility;
 using Smartshop.Views;
 
@@ -28,7 +29,7 @@ namespace Smartshop.ViewModels
             LoadCustomerViewCommand = new RelayCommand(LoadCustomerView);
             LoadLoginViewCommand = new RelayCommand(LoadLoginView);
             LoadNewInvoiceViewCommand = new RelayCommand(LoadNewInvoiceView);
-           // _selectedViewModel = new LoginViewModel();
+            // _selectedViewModel = new LoginViewModel();
         }
 
         public void LoadCustomerView()
@@ -44,7 +45,7 @@ namespace Smartshop.ViewModels
 
         public void LoadNewInvoiceView()
         {
-            SelectedViewModel = new InvoiceViewModel();
+            SelectedViewModel = new AddNewInvoiceViewModel();
         }
     }
 }

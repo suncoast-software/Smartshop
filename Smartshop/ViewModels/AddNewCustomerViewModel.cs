@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Smartshop.Data;
+using Smartshop.Helpers;
 using Smartshop.Models;
 using Smartshop.Utility;
 
@@ -19,7 +22,10 @@ namespace Smartshop.ViewModels
         public string CompanyName
         {
             get { return companyName; }
-            set { OnPropertyChanged(ref companyName, value); }
+            set 
+            {
+                OnPropertyChanged(ref companyName, value); 
+            }
         }
 
         private string contactName;
@@ -57,6 +63,13 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref cust, value); }
         }
 
+        private bool isValid;
+        public bool IsValid
+        {
+            get { return isValid; }
+            set { OnPropertyChanged(ref isValid, value); }
+        }
+
         public AddNewCustomerViewModel()
         {
             SaveCustomerCommand = new RelayCommand(SaveCustomer);
@@ -65,19 +78,24 @@ namespace Smartshop.ViewModels
 
         public async void SaveCustomer()
         {
-            
-            Cust.CompanyName = companyName;
-            Cust.ContactName = contactName;
-            Cust.Email = email;
-            Cust.Phone = phone;
-            Cust.Address = address;
+           
+            Cust = new Customer()
+            {
+                CustomerNumber = ulong.Parse(Utils.GenerateId(IdType.CUSTOMER)),
+                CompanyName = companyName,
+                ContactName = contactName,
+                Email = email,
+                Phone = phone,
+                Address = address
+            };
 
-            if (IsValid())
+            if (CompanyName != null && ContactName != null && Email != null && Phone != null && Address != null)
             {
                 using var db = new SmartshopDbContext();
-                await db.AddAsync(cust);
+                await db.AddAsync(Cust);
                 await db.SaveChangesAsync();
-            }
+                DeleteInputs();
+            } 
         }
 
         public void DeleteInputs()
@@ -89,10 +107,12 @@ namespace Smartshop.ViewModels
             Address = "";
         }
 
-        private bool IsValid()
+        private void ValidateProperty<T>(T value, string name)
         {
-            var valid = Cust != null ? true : false;
-            return valid;
+            Validator.ValidateProperty(value, new ValidationContext(this, null, null)
+            {
+                MemberName = name
+            });
         }
     }
 }

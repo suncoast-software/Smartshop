@@ -71,7 +71,13 @@
                        
                         <StackPanel Height="50" Grid.ColumnSpan="2"  Margin="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                            
-                            <TextBox x:Name="txtCompanyName" Text="{Binding Path=CompanyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="400"></TextBox>
+                            <TextBox x:Name="txtCompanyName" Text="{Binding Path=CompanyName, Mode=TwoWay, 
+                                     UpdateSourceTrigger=PropertyChanged}"
+                                     materialDesign:HintAssist.Hint="Company Name" 
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     Width="400">
+                                
+                            </TextBox>
                             <Image Source="\Assets\Images\defaultContact.png" Width="36" Height="36" Opacity=".4"/>
                         </StackPanel>
                     </Grid>

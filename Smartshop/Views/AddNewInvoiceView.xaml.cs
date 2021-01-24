@@ -23,8 +23,7 @@ namespace Smartshop.Views
     {
         public AddNewInvoiceView()
         {
-            InitializeComponent();
-            DataContext = new AddNewInvoiceViewModel();
+            InitializeComponent(); 
         }
     }
 }

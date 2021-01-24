@@ -9,8 +9,8 @@
         mc:Ignorable="d"
         Title="Smartshop 1.0.0.1" Height="1000" Width="1400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <DataTemplate x:Name="loginViewTemplate" DataType="{x:Type vm:LoginViewModel}">
-            <v:LoginView/>
+        <DataTemplate x:Name="AddNewInvoiceViewTemplate" DataType="{x:Type vm:AddNewInvoiceViewModel}">
+            <v:AddNewInvoiceView/>
         </DataTemplate>
         <DataTemplate x:Name="CustomerViewTemplate" DataType="{x:Type vm:AddNewCustomerViewModel}">
             <v:NewCustomerView/>
@@ -54,10 +54,10 @@
                 </Grid>
                 <!-- Inventory Button-->
                 <Grid Grid.Column="2">
-                    <Button Content="Inventory" 
+                    <Button Content="New Invoice" 
                             Background="{StaticResource ResourceKey=AccentLiteBrush}" 
                             Margin="1" 
-                            Command="{Binding LoadLoginViewCommand}"/>
+                            Command="{Binding LoadNewInvoiceViewCommand}"/>
                 </Grid>
             </StackPanel>
             <TextBlock Grid.Column="6" Grid.ColumnSpan="2" 
