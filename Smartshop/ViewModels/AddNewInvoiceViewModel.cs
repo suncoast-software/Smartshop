@@ -13,14 +13,14 @@ namespace Smartshop.ViewModels
 {
    public class AddNewInvoiceViewModel : BaseViewModel
     {
-        //TODO: add implimentation 
-
         public ICommand ClearInputCommand { get; set; }
         public ICommand SaveInvoiceCommand { get; set; }
-        public ICommand NewCustomerCommand { get; set; }
+        public ICommand AddNewCustomerCommand { get; set; }
+        public ICommand AddNewItemCommand { get; set; }
+        public ICommand EdititemCommand { get; set; }
 
-        private List<Customer> customers;
-        public List<Customer> Customers
+        private ICollection<Customer> customers;
+        public ICollection<Customer> Customers
         {
             get { return customers; }
             set { OnPropertyChanged(ref customers, value); }
@@ -31,6 +31,13 @@ namespace Smartshop.ViewModels
         {
             get { return items; }
             set { OnPropertyChanged(ref items, value); }
+        }
+
+        private ObservableCollection<Item> createdItems;
+        public ObservableCollection<Item> CreatedItems
+        {
+            get { return createdItems; }
+            set { OnPropertyChanged(ref createdItems, value); }
         }
 
         private Customer customer;
@@ -60,8 +67,19 @@ namespace Smartshop.ViewModels
             get { return selectedItem; }
             set 
             {
-                SelectedItemChanged();
                 OnPropertyChanged(ref selectedItem, value);
+                //SelectedItemChanged();
+            }
+        }
+
+        private Item createdItem;
+        public Item CreatedItem
+        {
+            get { return createdItem; }
+            set 
+            { 
+                OnPropertyChanged(ref createdItem, value);
+                //AddNewItem();
             }
         }
 
@@ -79,14 +97,65 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref itemName, value); }
         }
 
-        public AddNewInvoiceViewModel()
+        private ulong itemNumber;
+        public ulong ItemNumber
+        {
+            get { return itemNumber; }
+            set { OnPropertyChanged(ref itemNumber, value); }
+        }
+
+        private int quantity;
+        public int Quantity
+        {
+            get { return quantity; }
+            set { OnPropertyChanged(ref quantity, value); }
+        }
+
+        private string desc;
+        public string Desc
+        {
+            get { return desc; }
+            set { OnPropertyChanged(ref desc, value); }
+        }
+
+        private double price;
+        public double Price
+        {
+            get { return price; }
+            set { OnPropertyChanged(ref price, value); }
+        }
+
+        public AddNewInvoiceViewModel(List<Customer> _customers)
         {
             ClearInputCommand = new RelayCommand(ClearInputs);
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
-            NewCustomerCommand = new RelayCommand(LoadNewCustomerView);
+            AddNewCustomerCommand = new RelayCommand(LoadNewCustomerView);
+            AddNewItemCommand = new RelayCommand(AddNewItem);
+            EdititemCommand = new RelayCommand(EditItem);
             NewInvoiceNumber = Helpers.Utils.GenerateId(IdType.INVOICE);
-            GetCustomersByName();
+            CreatedItems = new ObservableCollection<Item>();
+            Customers = _customers;
+            //GetCustomersByName();
             LoadItems();
+        }
+
+        private void AddNewItem()
+        {
+            var item = new Item()
+            {
+                Name = ItemName,
+                Desc = Desc,
+                Quantity = Quantity,
+                ItemNumber = ItemNumber,
+                Price = Price
+            };
+            
+            CreatedItems.Add(item);
+        }
+
+        private void EditItem()
+        {
+
         }
 
         private void LoadNewCustomerView()
@@ -118,15 +187,8 @@ namespace Smartshop.ViewModels
 
         public void SelectedItemChanged()
         { 
-            if (SelectedItem == null)
-            {
-                return;
-            }
-            else
-            {
-                using var db = new SmartshopDbContext();
-                SelectedItem = db.Items.Where(x => x.Name == ItemName).FirstOrDefault();
-            }
+            //using var db = new SmartshopDbContext();
+            SelectedItem = Items.Where(x => x.Name == ItemName).FirstOrDefault();
 
         }
     }

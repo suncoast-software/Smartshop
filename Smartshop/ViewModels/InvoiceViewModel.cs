@@ -74,11 +74,9 @@ namespace Smartshop.ViewModels
             set { OnPropertyChanged(ref invNumber, value); }
         }
 
-        public InvoiceViewModel()
+        public InvoiceViewModel(List<Customer> _customers)
         {
-            using var db = new SmartshopDbContext();
-            Customers = db.Customers.ToList();
-
+            Customers = _customers;
             SaveInvoiceCommand = new RelayCommand(SaveInvoice);
             DeleteInputCommand = new RelayCommand(DeleteInput);
             NewCustomerCommand = new RelayCommand(CreateNewCustomer);

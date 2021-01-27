@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Smartshop.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="850" d:DesignWidth="900">
+             d:DesignHeight="1000" d:DesignWidth="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -42,11 +42,6 @@
 
                 <!--Tool Buttons -->
                 <StackPanel Grid.Column="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 2 10 0">
-                    <Button Command="{Binding NewCustomerCommand}" Margin="2">
-                        <Button.Content>
-                            <materialDesign:PackIcon Kind="PersonAdd" Width="26" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Button.Content>
-                    </Button>
                     <Button Command="{Binding SaveInvoiceCommand}" Margin="2">
                         <Button.Content>
                             <Image Source="\Assets\Images\saveIcon.png"/>
@@ -131,7 +126,30 @@
                              FontSize="18"
                              VerticalAlignment="Top"/>
                     
-
+                    <Button Command="{Binding AddNewCustomerCommand}" 
+                            Grid.Row="0" Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Margin="10"
+                            Width="235" 
+                            Height="40"
+                            HorizontalAlignment="Left">
+                        
+                            <StackPanel 
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="PersonAdd" 
+                                                            Width="26" 
+                                                            Height="30" 
+                                                            HorizontalAlignment="Center" 
+                                                            VerticalAlignment="Center"/>
+                                <TextBlock 
+                                    Text="Add New Customer"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Margin="10 0 0 0 "/>
+                            </StackPanel>
+                                       
+                    </Button>
 
                     <TextBox Grid.Row="1" Grid.Column="0"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                              materialDesign:HintAssist.Hint="Company Name" 
@@ -214,8 +232,9 @@
                          materialDesign:HintAssist.Foreground="{StaticResource AccentLiteBrush}"
                          Foreground="{StaticResource AccentLiteBrush}"
                          Height="50"
+                         
                          VerticalAlignment="Top"
-                         HorizontalAlignment="Left"
+                         HorizontalAlignment="Stretch"
                          Margin="10, 0"
                          FontSize="18" />
 
@@ -266,7 +285,7 @@
 
                                 <TextBox  
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                     Text="{Binding Customer.CompanyName, Mode=OneWayToSource}"
+                                     Text="{Binding SelectedCustomer.CompanyName, UpdateSourceTrigger=PropertyChanged}"
                                      materialDesign:HintAssist.Hint="Customer Name"
                                      materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                      Foreground="{StaticResource AccentLiteBrush}"
@@ -411,15 +430,18 @@
                                                    Foreground="{StaticResource AccentLiteBrush}"
                                                    ItemsSource="{Binding Items}" 
                                                    DisplayMemberPath="Name" 
-                                                   SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" 
+                                                   Text="{Binding ItemName}"
+                                                   SelectedItem="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                                                    Margin="10, 0, 0, 10" 
                                                    FontSize="18"
                                                    VerticalAlignment="Top"/>
                                         
-                                        <TextBox  materialDesign:HintAssist.Hint="Item #"
+                                        <TextBox  
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                                 materialDesign:HintAssist.Hint="Item #"
                                                   materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                                   Foreground="{StaticResource AccentLiteBrush}" 
-                                                  Text="{Binding SelectedItem.ItemNumber}"
+                                                  Text="{Binding ItemNumber, UpdateSourceTrigger=PropertyChanged}"
                                                   Margin="10, 0, 0, 10" 
                                                   Width="200"
                                                   Height="50"
@@ -427,9 +449,10 @@
                                                   VerticalAlignment="Top"/>
 
                                         <TextBox  materialDesign:HintAssist.Hint="Item Description"
+                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                                   materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                                   Foreground="{StaticResource AccentLiteBrush}" 
-                                                  Text="{Binding SelectedItem.Desc}"
+                                                  Text="{Binding Desc, UpdateSourceTrigger=PropertyChanged}"
                                                   Margin="10, 0, 0, 10" 
                                                   Width="200"
                                                   Height="50"
@@ -439,9 +462,10 @@
                                     <StackPanel Orientation="Horizontal">
 
                                         <TextBox  materialDesign:HintAssist.Hint="Price"
+                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                                   materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                                   Foreground="{StaticResource AccentLiteBrush}" 
-                                                  Text="{Binding SelectedItem.Price}"
+                                                  Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
                                                   Margin="10, 0, 0, 10" 
                                                   Width="200"
                                                   Height="50"
@@ -449,39 +473,70 @@
                                                   VerticalAlignment="Top"/>
 
                                         <TextBox  materialDesign:HintAssist.Hint="Quantity"
+                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                                   materialDesign:HintAssist.Foreground="{StaticResource PrimaryGreyBrush}"
                                                   Foreground="{StaticResource AccentLiteBrush}" 
-                                                  Text="{Binding SelectedItem.Quantity}"
+                                                  Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
                                                   Margin="10, 0, 0, 10" 
                                                   Width="200"
                                                   Height="50"
                                                   FontSize="18"
                                                   VerticalAlignment="Top"/>
-                                    </StackPanel>
+
+                                    <Button Command="{Binding AddNewItemCommand}" 
+                                            Margin="10"
+                                            Width="185" 
+                                            Height="40">
+                                        <StackPanel 
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                            <materialDesign:PackIcon Kind="Add" 
+                                                                     Width="26" 
+                                                                     Height="30" 
+                                                                     HorizontalAlignment="Center" 
+                                                                     VerticalAlignment="Center"/>
+                                            <TextBlock 
+                                                Text="Add New Item"
+                                                VerticalAlignment="Center"
+                                                FontSize="18"
+                                                Margin="10 0 0 0 "/>
+                                        </StackPanel>
+                                       
+                                    </Button>
+                                </StackPanel>
 
                                 <!-- ITEMS -->
-                                <ScrollViewer Height="Auto" 
-                                              VerticalScrollBarVisibility="Visible"
+                                <ScrollViewer Height="300"
+                                              VerticalScrollBarVisibility="Auto"
                                               CanContentScroll="True">
-                                    <ListView Grid.Row="0"
-                                     Style="{StaticResource MaterialDesignListView}" 
-                                     materialDesign:ListViewAssist.ListViewItemPadding="10" 
-                                     ItemsSource="{Binding Items}"
-                                     Width="Auto"  
-                                     Margin="20, 10, 0, 4" 
-                                     VerticalAlignment="Top">
-                                        <ListView.View>
-                                            <GridView>
-
-                                                <GridViewColumn Header="Item #" DisplayMemberBinding="{Binding ItemNumber}"/>
-                                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
-                                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Desc}"/>
-                                                <GridViewColumn Header="Available" DisplayMemberBinding="{Binding Quantity}"/>
-
-                                            </GridView>
-                                        </ListView.View>
-                                    </ListView>
+                                    
+                                    <ItemsControl>
+                                        <ListView Grid.Row="0"
+                                         Style="{StaticResource MaterialDesignListView}" 
+                                         materialDesign:ListViewAssist.ListViewItemPadding="10" 
+                                         ItemsSource="{Binding CreatedItems, UpdateSourceTrigger=PropertyChanged}"
+                                         Width="Auto"  
+                                         Margin="20, 10, 0, 4" 
+                                         VerticalAlignment="Top">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Header="Item #" DisplayMemberBinding="{Binding Path=ItemNumber}"/>
+                                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                                                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}"/>
+                                                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Desc}"/>
+                                                    <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Path=Quantity}"/>
+                                                    <GridViewColumn Header="Edit" Width="130">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <Button Content="Edit" Command="{Binding EditItemCommand}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </ItemsControl>
+                                    
                                 </ScrollViewer>
                             </StackPanel>
                             

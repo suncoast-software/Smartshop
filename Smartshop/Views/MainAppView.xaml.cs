@@ -12,23 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Smartshop.ViewModels;
 
 namespace Smartshop.Views
 {
     /// <summary>
-    /// Interaction logic for NewInvoiceView.xaml
+    /// Interaction logic for MainAppView.xaml
     /// </summary>
-    public partial class ViewInvoiceView : UserControl
+    public partial class MainAppView : UserControl
     {
-        public ViewInvoiceView()
+        public MainAppView()
         {
             InitializeComponent();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

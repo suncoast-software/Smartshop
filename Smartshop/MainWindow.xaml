@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Smartshop.ViewModels"
         xmlns:v="clr-namespace:Smartshop.Views"
         mc:Ignorable="d"
-        Title="Smartshop 1.0.0.1" Height="1000" Width="1400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Smartshop 1.0.0.1" Height="1200" Width="1400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <DataTemplate x:Name="AddNewInvoiceViewTemplate" DataType="{x:Type vm:AddNewInvoiceViewModel}">
             <v:AddNewInvoiceView/>
@@ -17,6 +17,9 @@
         </DataTemplate>
         <DataTemplate x:Name="InvoiceViewTemplate" DataType="{x:Type vm:InvoiceViewModel}">
             <v:ViewInvoiceView/>
+        </DataTemplate>
+        <DataTemplate x:Name="MainAppViewTemplate" DataType="{x:Type vm:MainAppViewModel}">
+            <v:MainAppView/>
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
@@ -50,7 +53,7 @@
                     <Button Content="Invoices" 
                             Background="{StaticResource ResourceKey=AccentLiteBrush}" 
                             Margin="1" 
-                            Command="{Binding LoadNewInvoiceViewCommand}"/>
+                            Command="{Binding LoadViewInvoiceViewCommand}"/>
                 </Grid>
                 <!-- Inventory Button-->
                 <Grid Grid.Column="2">
